@@ -40,7 +40,8 @@ public:
             0., cos(roll), -sin(roll),
             0., sin(roll), cos(roll);
 
-        dq = Rx * Ry * Rz;
+        //dq = Rx * Ry * Rz;
+        dq = Ry * Rz * Rx;
 
         std::cout << "dq-->" << "x:"<< dq.x() << " y:" << dq.y() 
             <<" z:" << dq.z() << " w:" << dq.w() << std::endl;
