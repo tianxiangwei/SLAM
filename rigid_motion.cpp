@@ -7,8 +7,8 @@ using namespace Eigen;
 
 Eigen::Vector3d R2ypr(const Eigen::Matrix3d& R)
 {
-    //旋转顺序是yaw-->pitch-->roll，通过旋转矩阵求的欧拉角
-    //R_roll*R_pitch*R_yaw
+    //旋转顺序是roll-->pitch-->yaw，通过旋转矩阵求的欧拉角
+    //R_yaw*R_pitch*R_roll
     Eigen::Vector3d n = R.col(0);
     Eigen::Vector3d o = R.col(1);
     Eigen::Vector3d a = R.col(2);
