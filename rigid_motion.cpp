@@ -5,10 +5,15 @@
 using namespace std;
 using namespace Eigen;
 
-Eigen::Vector3d R2ypr(const Eigen::Matrix3d& R)
+Eigen::Vector3d R2rpy(const Eigen::Matrix3d& R)
 {
     //旋转顺序是roll-->pitch-->yaw，通过旋转矩阵求的欧拉角
     //R_yaw*R_pitch*R_roll
+    /*
+     R_roll_pitch_yaw << cos(yaw)*cos(pitch), -sin(yaw)*cos(roll)+sin(pitch)*cos(yaw)*sin(roll), sin(yaw)*sin(roll)+sin(pitch)*cos(yaw)*cos(roll),
+			cos(pitch)*sin(yaw), cos(yaw)*cos(roll)+sin(pitch)*sin(yaw)*sin(roll), -cos(yaw)*sin(roll)+sin(pitch)*sin(yaw)*cos(roll),
+			-sin(pitch), cos(pitch)*sin(roll), cos(pitch)*cos(r)
+    */
     Eigen::Vector3d n = R.col(0);
     Eigen::Vector3d o = R.col(1);
     Eigen::Vector3d a = R.col(2);
@@ -130,6 +135,12 @@ Vector3d R_to_eulerAngle(Matrix3d R){
     /*R_pitch_yaw_roll << cos(yaw)*cos(pitch), -sin(yaw), cos(yaw)*sin(pitch),
                 cos(roll)*sin(yaw)*cos(pitch)+sin(roll)*sin(pitch), cos(roll)*cos(yaw), cos(roll)*sin(yaw)*sin(pitch)-sin(roll)*cos(pitch),
                 sin(roll)*sin(yaw)*cos(pitch)-cos(roll)*sin(pitch), sin(roll)*cos(yaw), sin(roll)*sin(yaw)*sin(pitch)+cos(roll)*cos(pitch);*/
+
+    /*
+    R_yaw_pitch_roll << cos(pitch)*cos(yaw), -cos(pitch)*sin(yaw), sin(pitch),
+			sin(roll)*sin(pitch)*cos(yaw)+cos(roll)*sin(yaw), sin(roll)*sin(pitch)*sin(yaw)+cos(roll)*cos(yaw), -sin(roll)*cos(pitch),
+			-cos(roll)*sin(pitch)*cos(yaw)+sin(roll)*sin(yaw), cos(roll)*sin(pitch)*sin(yaw)+sin(roll)*cos(yaw), cos(roll)*cos(pitch)
+    */
     Vector3d ypr;
     double yaw, pitch, roll;
     cout << "Rotation ==> eulaerAngles" << endl;
